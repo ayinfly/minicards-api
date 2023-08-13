@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
-const { OAuth2Client } = require("google-auth-library");
 
 // get all users
 exports.users_get = function (req, res, next) {
