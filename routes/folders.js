@@ -7,7 +7,7 @@ const verifyToken = require("../config/verifyToken");
 router.get("/", folderController.folders);
 
 // POST create folder
-router.folder("/create", verifyToken, folderController.create_folder);
+router.post("/create", verifyToken, folderController.create_folder);
 
 // PUT update folder
 router.put("/:id/edit", verifyToken, folderController.folder_update);
