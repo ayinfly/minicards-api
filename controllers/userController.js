@@ -61,7 +61,7 @@ exports.signup_post = [
         .isLength({ min: 6 })
         .escape()
         .custom(async (value, { req }) => {
-            if (value !== req.body.password) throw new Error("Cnofirmed Password must be the same as password");
+            if (value !== req.body.password) throw new Error("confirmed password must be the same as password");
             return true;
         }),
 
