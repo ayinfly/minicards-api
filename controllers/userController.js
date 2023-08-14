@@ -48,15 +48,15 @@ exports.login_post = function (req, res) {
 exports.signup_post = [
 
     // sanitize and validate fields
-    body("username", "Username must be at least 3 characters long.")
+    body("username", "username must be at least 3 characters long.")
         .trim()
         .isLength({ min: 3 })
         .escape(),
-    body("password", "Password must be at least 3 characters long.")
+    body("password", "password must be at least 6 characters long.")
         .trim()
         .isLength({ min: 6 })
         .escape(),
-    body("confirmPassword", "Password must be at least 3 characters long.")
+    body("confirmPassword", "password must be at least 6 characters long.")
         .trim()
         .isLength({ min: 6 })
         .escape()
@@ -68,9 +68,9 @@ exports.signup_post = [
     // process request
     async (req, res, next) => {
         // extract errors
-        const errors = validationResult(req.body);
+        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) return res.json({ errros: errors.array() });
+        if (!errors.isEmpty()) return res.status(403).json({ error: errors.array()[0]['msg']});
 
         // check if username exists
         const userExists = await User.find({ username: req.body.username });
