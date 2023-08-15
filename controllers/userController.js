@@ -10,8 +10,8 @@ const { body, validationResult } = require("express-validator");
 // get all users
 exports.users_get = function (req, res, next) {
     User.find()
-      .sort([["username", "ascending"]])
-      .exec((err, users) => {
+    .sort({ _id: -1 })
+    .exec((err, users) => {
         // error handler
         if (err) res.json(err);
         
@@ -24,7 +24,7 @@ exports.login_post = function (req, res) {
     passport.authenticate("local", { session: false }, (err, user) => {
         if (err || !user) {
             return res.status(401).json({
-                message: "Incorrect Username or Password",
+                error: "incorrect username or passwor",
                 user,
             });
         }

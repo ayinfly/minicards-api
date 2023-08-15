@@ -26,14 +26,14 @@ exports.create_folder = [
   },
 
   // validate and sanitize
-  body("title", "Title cannot be empty").trim().isLength({ min: 1 }).escape(),
+  body("title", "title cannot be empty").trim().isLength({ min: 1 }).escape(),
 
   // process request
-  (req, res) => {
+  async (req, res) => {
     // extract errors
     const errors = validationResult(req.body);
-
-    if (!errors.isEmpty()) return res.json({ errors: errors.array() });
+    console.log(errors.array())
+    if (!errors.isEmpty()) return res.json({ error: errors.array()[0] });
 
     const { title } = req.body;
 
@@ -110,7 +110,7 @@ exports.delete_folder = function (req, res) {
       if (err) return res.json(err);
 
       res.json({
-        message: "Folder deleted successfully",
+        message: "folder deleted successfully",
       });
     });
 };
@@ -125,3 +125,18 @@ exports.folder_get = function (req, res) {
       return res.json(folder);
     });
 };
+
+// get folders by an author
+exports.folders_by_author = function (req, res) {
+    const authorId = req.params.id; // Assuming the author's ID is passed as a parameter in the request
+  
+    Folder.find({ author: authorId })
+      .sort({ _id: -1 })
+      .populate("author")
+      .exec((err, folders) => {
+        if (err) return res.json(err);
+  
+        return res.json(folders);
+      });
+  };
+  
