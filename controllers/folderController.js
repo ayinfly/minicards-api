@@ -31,9 +31,9 @@ exports.create_folder = [
   // process request
   async (req, res) => {
     // extract errors
-    const errors = validationResult(req.body);
+    const errors = validationResult(req);
     console.log(errors.array())
-    if (!errors.isEmpty()) return res.json({ error: errors.array()[0] });
+    if (!errors.isEmpty()) return res.json({ error: 'title cannot be empty' });
 
     const { title } = req.body;
 
@@ -72,10 +72,11 @@ exports.folder_update = [
   // process request
   (req, res) => {
     // extract errors
-    const errors = validationResult(req.body);
+    const errors = validationResult(req);
+
 
     if (!errors.isEmpty()) {
-      return res.json(errors.array());
+      return res.json({ error: 'title cannot be empty' });
     }
 
     // create new folder object
