@@ -7,12 +7,12 @@ const verifyToken = require("../config/verifyToken");
 router.get("/", cardController.cards);
 
 // POST create card
-router.post("/", commentrController.create_card);
+router.post("/", cardController.create_card);
 
 // PUT edit card
-router.put("/:id/edit", verifyToken, commentrController.edit_card);
+router.put("/:id/edit", verifyToken, cardController.edit_card);
 
 // DELETE delete card
-router.delete("/:id/delete", verifyToken, commentrController.delete_card);
+router.delete("/:id/delete", verifyToken, cardController.delete_card);
 
 module.exports = router;
