@@ -34,7 +34,7 @@ exports.create_card = [
 
     if (!errors.isEmpty()) return res.json(err);
 
-    const { username, content } = req.body;
+    const { front, back } = req.body;
 
     // create card
     Card.create(
