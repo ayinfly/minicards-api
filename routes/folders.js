@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const folderController = require("../controllers/folderController");
+const cardController = require("../controllers/cardController");
 const verifyToken = require("../config/verifyToken");
 
 // GET all folders
@@ -17,5 +18,8 @@ router.delete("/:id/delete", verifyToken, folderController.delete_folder);
 
 // GET single folder
 router.get("/:id", folderController.folder_get);
+
+// GET single folder cards
+router.get("/:id", cardController.cards)
 
 module.exports = router;
