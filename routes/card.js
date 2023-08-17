@@ -3,9 +3,6 @@ const router = express.Router({ mergeParams: true });
 const cardController = require("../controllers/cardController");
 const verifyToken = require("../config/verifyToken");
 
-// GET all comments
-router.get("/", cardController.cards);
-
 // create card
 router.post("/", commentrController.create_card);
 
