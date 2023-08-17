@@ -10,6 +10,7 @@ require("./config/passport");
 
 var usersRouter = require('./routes/users');
 var foldersRouter = require('./routes/folders')
+var cardRouter = require('./routes/cards');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(
 
 app.use('/api/users', usersRouter);
 app.use('/api/folders', foldersRouter);
+app.use('/api/folders/:folder_id/cards', cardRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server started on port ${process.env.PORT || 3000}`);
